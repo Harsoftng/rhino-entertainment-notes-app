@@ -33,7 +33,7 @@ list:
 	docker-compose ps ;\
 
 seed:
-	npx mikro-orm seeder:run
+	yarn seed
 
 docker-update: stop
 	docker-compose pull ;\

@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "seed": "lerna run seed --stream",
     "dev": "lerna run dev --stream",
     "build": "lerna run build --stream",
     "lint": "lerna run lint --stream --parallel",
