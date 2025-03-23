@@ -10,6 +10,7 @@ import SuspenseLoading from "@/components/shared/misc/SuspenseLoading";
 import { SWRConfig } from "swr";
 import { getAppAPIFetcher } from "@/components/shared/utils/functions";
 import useAxiosClient from "@/store/hooks/useAxiosClient";
+import ErrorBoundary from "@/components/shared/misc/ErrorBoundary";
 
 const MainLayout = (props: IMainLayoutProps): React.ReactElement => {
   const { children } = props;
@@ -22,25 +23,27 @@ const MainLayout = (props: IMainLayoutProps): React.ReactElement => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={<SuspenseLoading />}>
-        <SWRConfig
-          value={{
-            fetcher: appAPIFetcher,
-            revalidateIfStale: true,
-            revalidateOnMount: true,
-            revalidateOnReconnect: true,
-            revalidateOnFocus: true,
-            shouldRetryOnError: true,
-          }}
-        >
-          <div
-            data-theme={theme}
-            className="flex items-start justify-start flex-col h-screen w-screen"
+        <ErrorBoundary>
+          <SWRConfig
+            value={{
+              fetcher: appAPIFetcher,
+              revalidateIfStale: true,
+              revalidateOnMount: true,
+              revalidateOnReconnect: true,
+              revalidateOnFocus: true,
+              shouldRetryOnError: true,
+            }}
           >
-            <Header />
+            <div
+              data-theme={theme}
+              className="flex items-start justify-start flex-col h-screen w-screen"
+            >
+              <Header />
 
-            <Content>{children}</Content>
-          </div>
-        </SWRConfig>
+              <Content>{children}</Content>
+            </div>
+          </SWRConfig>
+        </ErrorBoundary>
       </PersistGate>
     </Provider>
   );
