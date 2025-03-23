@@ -9,7 +9,7 @@ const Header = (): React.ReactElement => {
 
   useEffect(() => {
     changeTheme(checked ? "forest" : "light");
-  }, [checked]);
+  }, [checked, changeTheme]);
 
   const setTheme = () => setChecked(!checked);
 

@@ -5,7 +5,7 @@ export function getDefaultTheme(): ThemeType {
 
   if (typeof window !== "undefined") {
     defaultTheme =
-      (localStorage.getItem("theme")?.toString() as ThemeType) || "forest";
+      (localStorage.getItem("theme")?.toString() as ThemeType) || defaultTheme;
   }
 
   return defaultTheme;
