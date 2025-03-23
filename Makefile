@@ -14,9 +14,9 @@ configure-env:
 
 setup-local:
 	make configure-env;\
-	yarn install;\
 	make start;\
-	yarn seed;\
+	yarn install;\
+	make create-db-and-seed;\
 	yarn dev;\
 
 start:
@@ -34,6 +34,9 @@ list:
 
 seed:
 	yarn seed
+
+create-db-and-seed:
+	yarn setup:db:seed
 
 docker-update: stop
 	docker-compose pull ;\

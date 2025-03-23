@@ -68,9 +68,9 @@ $ cp ./packages/notes-backend-api/.env.dist ./packages/notes-backend-api/.env
 
 ### Install and launch application
 ```bash
-$ yarn install
 $ docker-compose up -d
-$ yarn seed
+$ yarn install
+$ yarn setup:db:seed
 $ yarn dev
 ```
 

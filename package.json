@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "seed": "lerna run seed --stream",
+    "setup:db:seed": "lerna run setup:db:seed --stream",
     "dev": "lerna run dev --stream",
     "build": "lerna run build --stream",
     "lint": "lerna run lint --stream --parallel",
