@@ -1,7 +1,15 @@
 {
-  "name": "notes-app",
+  "name": "@rhino/notes-app",
   "version": "0.1.0",
+  "description": "Rhino Entertainment notes app backend service",
+  "author": "Ibrahim Haruna <harsoftng@gmail.com>",
   "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "directory": "packages/notes-app",
+    "url": "https://github.com/harsoftng/rhino-entertainment-notes-app.git"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
