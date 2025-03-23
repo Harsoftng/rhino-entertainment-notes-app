@@ -11,7 +11,7 @@ import AppInputField from "@/components/shared/forms/AppInputField";
 import AppTextAreaField from "@/components/shared/forms/AppTextAreaField";
 
 const NotesForm = ({ note, mode }: INotesFormProps): React.ReactElement => {
-  const { createNote, updating } = useNotesFunctions();
+  const { createNote, updating, editNote } = useNotesFunctions();
 
   const initialValues: IFormInitialValues = {
     title: note?.title || "",
@@ -32,7 +32,9 @@ const NotesForm = ({ note, mode }: INotesFormProps): React.ReactElement => {
     }
 
     if (mode === "edit") {
-      //implement edit mode soon
+      if (confirm("Are you sure you want to update this note")) {
+        await editNote({ ...values, id: note?.id || "" });
+      }
     } else {
       await createNote({ ...values });
     }

@@ -1,0 +1,7 @@
+export enum ENotesDialogView {
+  VIEW_NOTE_VIEW = "VIEW_NOTE_VIEW",
+
+  EDIT_NOTE_VIEW = "EDIT_NOTE_VIEW",
+
+  CREATE_NOTE_VIEW = "CREATE_NOTE_VIEW",
+}

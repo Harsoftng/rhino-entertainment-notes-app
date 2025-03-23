@@ -6,25 +6,29 @@ import { getAxiosClient } from "@/store/hooks/useAxiosClient";
 import { notesActions } from "@/store/slices/notes/notesSlice";
 import Utilities from "@/components/shared/utils/Utilities";
 
-interface ICreateNoteOkResponse {
+interface IEditNoteOkResponse {
   data: INote;
 }
-interface ICreateNoteData extends IFormInitialValues {}
 
-export const createNoteApi = createAsyncThunk(
-  "notes/createNoteApi",
-  async (inputData: ICreateNoteData, { dispatch }): Promise<any> => {
+interface IEditNoteData extends IFormInitialValues {
+  id: string;
+}
+
+export const editNoteApi = createAsyncThunk(
+  "notes/editNoteApi",
+  async (inputData: IEditNoteData, { dispatch }): Promise<any> => {
     try {
       const axiosClient = getAxiosClient();
 
-      const { note, title } = inputData;
+      const { id, title, note } = inputData;
 
       const formData = new FormData();
-      formData.append("note", note || "");
       formData.append("title", title || "");
+      formData.append("note", note || "");
+      formData.append("id", id || "");
 
-      const response: ICreateNoteOkResponse = await axiosClient.post(
-        `/api/notes`,
+      const response: IEditNoteOkResponse = await axiosClient.put(
+        `/api/notes/${id}`,
         formData,
         {
           headers: {
@@ -34,9 +38,9 @@ export const createNoteApi = createAsyncThunk(
       );
 
       if (response?.data && response?.data?.title) {
-        toast("Note created successfully!", { type: "success" });
+        toast("Note updated successfully!", { type: "success" });
         dispatch(notesActions.closeNoteDialog());
-        dispatch(notesActions.addNote(response?.data as INote));
+        dispatch(notesActions.updateNote(response?.data as INote));
       } else {
         // @ts-ignore
         toast(Utilities.processResponse(response?.data?.message), {
@@ -44,8 +48,10 @@ export const createNoteApi = createAsyncThunk(
         });
       }
     } catch (error: any) {
+      console.log({ error });
+
       if (!error?.response) {
-        toast("Network Error! Could not contact Rhino Servers!", {
+        toast("Network Error! Could not contact Beeproger Servers!", {
           type: "error",
         });
       } else {

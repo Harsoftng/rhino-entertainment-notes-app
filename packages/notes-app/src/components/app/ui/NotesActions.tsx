@@ -1,7 +1,10 @@
 import React from "react";
 import clsx from "clsx";
+import { useNotesFunctions } from "@/components/app/api/useNotesFunctions";
+import { INoteProps } from "@/components/app/types/INotesProps";
 
-const NotesActions = (): React.ReactElement => {
+const NotesActions = ({ note }: INoteProps): React.ReactElement => {
+  const { openEditNoteDialog } = useNotesFunctions();
   const deleting = false;
 
   return (
@@ -9,7 +12,7 @@ const NotesActions = (): React.ReactElement => {
       <div className="tooltip tooltip-primary" data-tip="Edit Note">
         <button
           className="btn btn-sm btn-primary rounded-r-none"
-          onClick={() => {}}
+          onClick={() => openEditNoteDialog(note.id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

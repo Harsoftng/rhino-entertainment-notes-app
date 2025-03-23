@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { INotesState } from "@/store/types/INotesState";
 import { INote } from "@/components/app/types/INote";
+import { ENotesDialogView } from "@/store/types/ENotesDialogView";
 
 const defaultNoteState: INotesState = {
   dialogIsOpen: false,
   loading: false,
+  view: ENotesDialogView.CREATE_NOTE_VIEW,
   notes: [],
   selectedNoteId: "",
 };
@@ -16,10 +18,12 @@ const notesSlice = createSlice({
     openNoteDialog(state: INotesState) {
       state.dialogIsOpen = true;
     },
+
     closeNoteDialog(state: INotesState) {
       state.dialogIsOpen = false;
-      state.selectedNoteId = "0";
+      state.selectedNoteId = "";
     },
+
     setLoading(state: INotesState, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
@@ -27,10 +31,12 @@ const notesSlice = createSlice({
     addNote(state: INotesState, action: PayloadAction<INote>) {
       state.notes = [action.payload, ...state.notes];
     },
+
     deleteNote(state: INotesState, action: PayloadAction<number>) {
       state.notes =
         state.notes?.filter((note: INote) => note.id !== action.payload) || [];
     },
+
     updateNote(state: INotesState, action: PayloadAction<INote>) {
       const otherNotes: INote[] =
         state.notes?.filter((note: INote) => note.id !== action.payload.id) ||
@@ -41,6 +47,7 @@ const notesSlice = createSlice({
     setNotes(state: INotesState, action: PayloadAction<INote[]>) {
       state.notes = action.payload;
     },
+
     clearNotes(state: INotesState) {
       state.notes = [];
     },
@@ -48,8 +55,9 @@ const notesSlice = createSlice({
     setSelectedNoteId(state: INotesState, action: PayloadAction<string>) {
       state.selectedNoteId = action.payload;
     },
-    clearNoteState() {
-      return defaultNoteState;
+
+    setView(state: INotesState, action: PayloadAction<ENotesDialogView>) {
+      state.view = action.payload;
     },
   },
 });

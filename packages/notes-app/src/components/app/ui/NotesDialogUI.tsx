@@ -1,12 +1,17 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import CreateNoteUI from "./CreateNoteUI";
-import useNoteState from "@/store/hooks/notes/useNoteState";
 import { useNotesFunctions } from "@/components/app/api/useNotesFunctions";
+import { useGetSingleNoteAPI } from "@/components/app/api/useGetSingleNoteAPI";
+import { ENotesDialogView } from "@/store/types/ENotesDialogView";
+import { BeatLoader } from "react-spinners";
+import EditNoteUI from "@/components/app/ui/EditNoteUI";
+import useNoteState from "@/store/hooks/notes/useNoteState";
 
 const NotesDialogUI = (): React.ReactElement => {
-  const { dialogIsOpen } = useNoteState();
+  const { dialogIsOpen, view, selectedNoteId } = useNoteState();
   const { closeDialog } = useNotesFunctions();
+  const { isLoading, note } = useGetSingleNoteAPI(selectedNoteId || "");
 
   return (
     <Transition appear show={dialogIsOpen} as={Fragment}>
@@ -30,7 +35,25 @@ const NotesDialogUI = (): React.ReactElement => {
 
         <div className="fixed inset-0 overflow-y-auto glass">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <CreateNoteUI />
+            {view === ENotesDialogView.CREATE_NOTE_VIEW ? (
+              <CreateNoteUI />
+            ) : (
+              <>
+                {isLoading || note?.id !== selectedNoteId ? (
+                  <div className="p-10">
+                    <BeatLoader loading={true} />
+                  </div>
+                ) : (
+                  <>
+                    {note &&
+                      note.id === selectedNoteId &&
+                      view === ENotesDialogView.EDIT_NOTE_VIEW && (
+                        <EditNoteUI note={note} />
+                      )}
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </Dialog>
