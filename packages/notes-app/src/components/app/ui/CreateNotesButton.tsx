@@ -1,11 +1,14 @@
 import React from "react";
+import { useNotesFunctions } from "@/components/app/api/useNotesFunctions";
 
 const CreateNotesButton = (): React.ReactElement => {
+  const { openCreateNoteDialog } = useNotesFunctions();
+
   return (
     <div className="mb-3">
       <button
         className="btn btn-outline btn-primary capitalize"
-        onClick={() => {}}
+        onClick={() => openCreateNoteDialog()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

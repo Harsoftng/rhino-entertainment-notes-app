@@ -1,4 +1,6 @@
 import { format } from "date-fns";
+import React from "react";
+import ServerError from "@/components/shared/misc/ServerError";
 
 export function getUserFriendlyDateTime(date: string): string {
   if (date) {
@@ -11,7 +13,14 @@ export function getUserFriendlyDateTime(date: string): string {
   }
 }
 
+export function processResponse(
+  message: string | string[],
+): React.ReactElement {
+  return <ServerError message={message} />;
+}
+
 const Utilities = {
   getUserFriendlyDateTime,
+  processResponse,
 };
 export default Utilities;

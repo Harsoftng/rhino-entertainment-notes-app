@@ -25,7 +25,7 @@ const notesSlice = createSlice({
     },
 
     addNote(state: INotesState, action: PayloadAction<INote>) {
-      state.notes = [...state.notes, action.payload];
+      state.notes = [action.payload, ...state.notes];
     },
     deleteNote(state: INotesState, action: PayloadAction<number>) {
       state.notes =
@@ -33,7 +33,7 @@ const notesSlice = createSlice({
     },
     updateNote(state: INotesState, action: PayloadAction<INote>) {
       const otherNotes: INote[] =
-        state.notes?.filter((todo: INote) => todo.id !== action.payload.id) ||
+        state.notes?.filter((note: INote) => note.id !== action.payload.id) ||
         [];
       state.notes = [...otherNotes, action.payload];
     },
