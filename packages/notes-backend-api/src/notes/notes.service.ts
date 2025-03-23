@@ -1,10 +1,16 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
 import { RedisService } from '../database/redis.service';
 import { Note } from './entities/note.entity';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { INote, INotesResponse } from './types/note.interface';
 import { Utilities } from '../shared/utilities.class';
+import { CreateNoteDTO } from './dtos/create-note.dto';
 
 @Injectable()
 export class NotesService {
@@ -39,5 +45,16 @@ export class NotesService {
       `note:${id}`,
       async () => await this.notesRepository.findOneOrFail({ id }),
     );
+  }
+
+  async createNote(noteDTO: CreateNoteDTO): Promise<INote> {
+    const { note, title } = noteDTO;
+
+    const newNote = new Note(title, note);
+
+    await this.em.persistAndFlush(newNote);
+    await this.em.refresh(newNote);
+
+    return newNote;
   }
 }

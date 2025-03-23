@@ -1,9 +1,5 @@
 SHELL := /bin/bash
 
-grn=$'\e[1;32m
-yel=$'\e[1;33m
-end=$'\e[0m
-
 -include .env
 
 # Docker operations.
