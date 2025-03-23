@@ -1,3 +1,12 @@
+import Notes from "@/components/app/NotesUI";
+import AppTitle from "@/components/shared/misc/AppTitle";
+
 export default function Home() {
-  return <div className=""></div>;
+  return (
+    <>
+      <AppTitle title="Welcome" />
+
+      <Notes />
+    </>
+  );
 }

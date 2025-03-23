@@ -3,7 +3,7 @@ import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import notesSlice from "./slices/notes/notesSlice";
+import notesSlice from "@/store/slices/notes/notesSlice";
 
 const appReducer = combineReducers({
   //app wide state goes in here

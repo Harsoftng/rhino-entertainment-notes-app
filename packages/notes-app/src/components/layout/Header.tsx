@@ -14,7 +14,7 @@ const Header = (): React.ReactElement => {
   const setTheme = () => setChecked(!checked);
 
   return (
-    <div className="navbar bg-base-100 items-center justify-between">
+    <div className="navbar border-b-2 dark:border-b-0 bg-base-100 items-center justify-between">
       <Link href={"/"} className="btn btn-ghost normal-case text-xl">
         <Image
           src={"/rhino-logo.png"}
@@ -23,7 +23,7 @@ const Header = (): React.ReactElement => {
           height={45}
         ></Image>
       </Link>
-      <button className="btn btn-ghost m-1 p-0">
+      <button className="btn btn-ghost m-1 p-1">
         <label className="swap swap-rotate">
           <input type="checkbox" onChange={setTheme} checked={checked} />
 

@@ -17,7 +17,7 @@ export function getAppAPIFetcher(axiosClient: AxiosInstance) {
   return function appAPIFetcher(resource: string) {
     return axiosClient
       .get(resource)
-      .then((response: AxiosResponse<any>) => response?.data)
+      .then((response: AxiosResponse) => response?.data)
       .catch(function (error) {
         if (error.response) {
           // The request was made and the server responded with a status code

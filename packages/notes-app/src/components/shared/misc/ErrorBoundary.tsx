@@ -2,12 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 class ErrorBoundary extends React.Component<any, any> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(props: any) {
     super(props);
     this.state = { error: null, errorInfo: null };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   componentDidCatch(error: any, errorInfo: any) {
     // You can also log the error to an error reporting service
     // logErrorToMyService(error, errorInfo);
@@ -18,9 +21,7 @@ class ErrorBoundary extends React.Component<any, any> {
   }
 
   render() {
-    // @ts-ignore
     if (this?.state?.errorInfo) {
-      // You can render any custom fallback UI
       return (
         <React.Fragment>
           <div className="flex items-center justify-center flex-col w-screen mt-40 rounded-2xl">
@@ -71,7 +72,6 @@ class ErrorBoundary extends React.Component<any, any> {
       );
     }
 
-    // @ts-ignore
     return this.props.children;
   }
 }

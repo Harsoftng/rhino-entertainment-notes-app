@@ -6,7 +6,7 @@ const SuspenseLoading = (): React.ReactElement => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    let timeout = setTimeout(() => setShow(true), 300);
+    const timeout = setTimeout(() => setShow(true), 300);
     return () => {
       clearTimeout(timeout);
     };
