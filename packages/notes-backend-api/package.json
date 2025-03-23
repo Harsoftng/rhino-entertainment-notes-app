@@ -12,7 +12,7 @@
   },
   "scripts": {
     "seed": "npx mikro-orm seeder:run",
-    "setup:db:seed": "npx mikro-orm schema:fresh --seed",
+    "setup:db": "npx mikro-orm schema:fresh --seed",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

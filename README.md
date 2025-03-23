@@ -70,7 +70,8 @@ $ cp ./packages/notes-backend-api/.env.dist ./packages/notes-backend-api/.env
 ```bash
 $ docker-compose up -d
 $ yarn install
-$ yarn setup:db:seed
+$ yarn setup:db
+$ yarn seed
 $ yarn dev
 ```
 
