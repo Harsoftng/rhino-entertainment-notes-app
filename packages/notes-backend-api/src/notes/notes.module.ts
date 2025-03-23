@@ -4,6 +4,7 @@ import { NotesController } from './notes.controller';
 import { DatabaseModule } from '../database/database.module';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Note } from './entities/note.entity';
+import { NoteListener } from './listeners/note.listener';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { Note } from './entities/note.entity';
       entities: [Note] as any,
     }),
   ],
-  providers: [NotesService],
+  providers: [NotesService, NoteListener],
   controllers: [NotesController],
 })
 export class NotesModule {}

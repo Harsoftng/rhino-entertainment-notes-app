@@ -12,12 +12,15 @@ import { INote, INotesResponse } from './types/note.interface';
 import { Utilities } from '../shared/utilities.class';
 import { CreateNoteDTO } from './dtos/create-note.dto';
 import { EditNoteDTO } from './dtos/edit-note.dto';
+import { GenericNoteEvent } from './events/note.event';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class NotesService {
   constructor(
     private readonly em: EntityManager,
     private readonly redisService: RedisService,
+    private readonly eventEmitter: EventEmitter2,
 
     @InjectRepository(Note as any)
     private readonly notesRepository: EntityRepository<Note>,
@@ -64,6 +67,8 @@ export class NotesService {
     await this.em.persistAndFlush(newNote);
     await this.em.refresh(newNote);
 
+    this.eventEmitter.emit('note.created', new GenericNoteEvent(newNote.id));
+
     return newNote;
   }
 
@@ -97,6 +102,8 @@ export class NotesService {
     await this.em.flush();
     await this.em.refresh(note);
 
+    this.eventEmitter.emit('note.updated', new GenericNoteEvent(note.id));
+
     return note;
   }
 
@@ -120,6 +127,8 @@ export class NotesService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
+
+    this.eventEmitter.emit('note.deleted', new GenericNoteEvent(note.id));
 
     return note;
   }
