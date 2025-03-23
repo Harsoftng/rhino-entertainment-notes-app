@@ -11,6 +11,7 @@
     "url": "https://github.com/harsoftng/rhino-entertainment-notes-app.git"
   },
   "scripts": {
+    "seed": "npx mikro-orm seeder:run",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
