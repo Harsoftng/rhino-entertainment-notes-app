@@ -42,10 +42,18 @@ export class NotesService {
       );
     }
 
-    return await this.redisService.remember<INote>(
-      `note:${id}`,
-      async () => await this.notesRepository.findOneOrFail({ id }),
-    );
+    return await this.redisService.remember<INote>(`note:${id}`, async () => {
+      const note: INote = (await this.notesRepository.findOne({ id })) as INote;
+
+      if (!note?.id) {
+        throw new HttpException(
+          Utilities.getHttpResponse(`Note with id ${id} not found!`),
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      return note;
+    });
   }
 
   async createNote(noteDTO: CreateNoteDTO): Promise<INote> {
@@ -88,6 +96,30 @@ export class NotesService {
     wrap(note).assign(noteDTO as any);
     await this.em.flush();
     await this.em.refresh(note);
+
+    return note;
+  }
+
+  async deleteNote(id: string): Promise<INote> {
+    const note = await this.notesRepository.findOne({ id });
+
+    if (!note?.id) {
+      throw new HttpException(
+        Utilities.getHttpResponse(`Note with id ${id} not found!`),
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    const deleted = await this.notesRepository.nativeDelete({ id });
+
+    if (deleted < 0) {
+      throw new HttpException(
+        Utilities.getHttpResponse(
+          `Error occurred. Note with id ${id} not deleted!`,
+        ),
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
 
     return note;
   }

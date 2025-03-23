@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -43,5 +44,11 @@ export class NotesController {
     @Body() editNoteDTO: EditNoteDTO,
   ): Promise<INote> {
     return this.notesService.updateNote(id, editNoteDTO);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteNote(@Param('id', ParseUUIDPipe) id: string): Promise<INote> {
+    return this.notesService.deleteNote(id);
   }
 }
