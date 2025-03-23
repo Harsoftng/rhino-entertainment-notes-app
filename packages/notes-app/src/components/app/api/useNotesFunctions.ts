@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/store/hooks/useAppDispatch";
 import { notesActions } from "@/store/slices/notes/notesSlice";
 import { ENotesDialogView } from "@/store/types/ENotesDialogView";
 import { editNoteApi } from "@/components/app/api/editNoteApi";
+import { deleteNoteApi } from "@/components/app/api/deleteNoteApi";
 
 export const useNotesFunctions = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +40,26 @@ export const useNotesFunctions = () => {
     [],
   );
 
+  const deleteNote = useCallback(async (id: string): Promise<void> => {
+    setDeleting(true);
+    if (!id) {
+      setDeleting(false);
+      return;
+    }
+    const confirmed = confirm(
+      "Are you sure you want to delete this note? This cannot be undone!",
+    );
+
+    if (!confirmed) {
+      setDeleting(false);
+      return;
+    }
+
+    await dispatch(deleteNoteApi({ id }));
+
+    setDeleting(false);
+  }, []);
+
   const closeDialog = useCallback((): void => {
     dispatch(notesActions.closeNoteDialog());
   }, []);
@@ -58,6 +79,7 @@ export const useNotesFunctions = () => {
   return {
     createNote,
     editNote,
+    deleteNote,
     deleting,
     closeDialog,
     openCreateNoteDialog,

@@ -10,7 +10,7 @@ const NotesContent = ({ note }: INoteProps): React.ReactElement => {
 
   return (
     <div>
-      <div className="font-bold">{content}</div>
+      <div className="dark:font-bold">{content}</div>
     </div>
   );
 };

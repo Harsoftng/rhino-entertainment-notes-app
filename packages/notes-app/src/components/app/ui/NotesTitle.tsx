@@ -10,7 +10,7 @@ const NotesTitle = ({ note }: INoteProps): React.ReactElement => {
     >
       <div className="flex items-center space-x-3">
         <div>
-          <div className="font-bold">{note.title}</div>
+          <div className="dark:font-bold">{note.title}</div>
         </div>
       </div>
     </div>

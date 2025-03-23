@@ -9,7 +9,6 @@ import Utilities from "@/components/shared/utils/Utilities";
 interface IEditNoteOkResponse {
   data: INote;
 }
-
 interface IEditNoteData extends IFormInitialValues {
   id: string;
 }
@@ -51,7 +50,7 @@ export const editNoteApi = createAsyncThunk(
       console.log({ error });
 
       if (!error?.response) {
-        toast("Network Error! Could not contact Beeproger Servers!", {
+        toast("Network Error! Could not contact Rhino Servers!", {
           type: "error",
         });
       } else {

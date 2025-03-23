@@ -47,7 +47,7 @@ export class NotesController {
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @HttpCode(HttpStatus.OK)
   async deleteNote(@Param('id', ParseUUIDPipe) id: string): Promise<INote> {
     return this.notesService.deleteNote(id);
   }

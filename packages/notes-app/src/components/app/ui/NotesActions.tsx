@@ -4,8 +4,11 @@ import { useNotesFunctions } from "@/components/app/api/useNotesFunctions";
 import { INoteProps } from "@/components/app/types/INotesProps";
 
 const NotesActions = ({ note }: INoteProps): React.ReactElement => {
-  const { openEditNoteDialog } = useNotesFunctions();
-  const deleting = false;
+  const { openEditNoteDialog, deleting, deleteNote } = useNotesFunctions();
+
+  const onDeleteNote = async (): Promise<void> => {
+    await deleteNote(note.id);
+  };
 
   return (
     <div className="btn-group flex">
@@ -36,7 +39,7 @@ const NotesActions = ({ note }: INoteProps): React.ReactElement => {
           className={clsx("btn btn-sm btn-error rounded-l-none", {
             loading: deleting,
           })}
-          onClick={() => {}}
+          onClick={onDeleteNote}
         >
           {!deleting && (
             <svg
