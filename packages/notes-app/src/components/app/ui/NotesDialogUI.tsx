@@ -6,6 +6,7 @@ import { useGetSingleNoteAPI } from "@/components/app/api/useGetSingleNoteAPI";
 import { ENotesDialogView } from "@/store/types/ENotesDialogView";
 import { BeatLoader } from "react-spinners";
 import EditNoteUI from "@/components/app/ui/EditNoteUI";
+import ViewNoteUI from "@/components/app/ui/ViewNoteUI";
 import useNoteState from "@/store/hooks/notes/useNoteState";
 
 const NotesDialogUI = (): React.ReactElement => {
@@ -45,6 +46,12 @@ const NotesDialogUI = (): React.ReactElement => {
                   </div>
                 ) : (
                   <>
+                    {note &&
+                      note.id === selectedNoteId &&
+                      view === ENotesDialogView.VIEW_NOTE_VIEW && (
+                        <ViewNoteUI note={note} />
+                      )}
+
                     {note &&
                       note.id === selectedNoteId &&
                       view === ENotesDialogView.EDIT_NOTE_VIEW && (

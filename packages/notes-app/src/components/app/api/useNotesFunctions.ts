@@ -76,6 +76,12 @@ export const useNotesFunctions = () => {
     dispatch(notesActions.openNoteDialog());
   }, []);
 
+  const openViewNoteDialog = useCallback((id: string): void => {
+    dispatch(notesActions.setSelectedNoteId(id));
+    dispatch(notesActions.setView(ENotesDialogView.VIEW_NOTE_VIEW));
+    dispatch(notesActions.openNoteDialog());
+  }, []);
+
   return {
     createNote,
     editNote,
@@ -84,6 +90,7 @@ export const useNotesFunctions = () => {
     closeDialog,
     openCreateNoteDialog,
     openEditNoteDialog,
+    openViewNoteDialog,
     updating,
   };
 };
