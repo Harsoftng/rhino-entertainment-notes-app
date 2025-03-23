@@ -28,7 +28,7 @@ const ViewNoteUI = ({ note }: { note: INote }): React.ReactElement => {
           </svg>
         </button>
       </div>
-      <div className="card lg:max-w-[50%] xl:max-w-[40%] md:max-w-[80%] sm:max-w-[90%] max-w-[90%] bg-gray-300 shadow-xl rounded-t-none">
+      <div className="card lg:min-w-[50%] xl:min-w-[40%] md:min-w-[80%] sm:min-w-[90%] min-w-[90%] lg:max-w-[50%] xl:max-w-[40%] md:max-w-[80%] sm:max-w-[90%] max-w-[90%] bg-gray-300 shadow-xl rounded-t-none">
         <div className="flex flex-col p-5">
           <NoteLabel label="Title" value={note.title} />
 
