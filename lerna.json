@@ -1,4 +1,22 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "0.0.0"
+  "version": "independent",
+  "packages": [
+    "packages/*"
+  ],
+  "npmClientArgs": [
+    "--no-lockfile"
+  ],
+  "command": {
+    "version": {
+      "ignoreChanges": [
+        "*.md"
+      ],
+      "npmClient": "yarn",
+      "message": "chore(release): publish"
+    },
+    "publish": {
+      "npmClient": "yarn"
+    }
+  }
 }
