@@ -6,7 +6,11 @@ import { ConfigModule } from '@nestjs/config';
 import { NotesModule } from './notes/notes.module';
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({ expandVariables: true }), NotesModule],
+  imports: [
+    DatabaseModule,
+    ConfigModule.forRoot({ expandVariables: true }),
+    NotesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
