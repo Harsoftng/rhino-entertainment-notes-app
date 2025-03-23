@@ -1,7 +1,6 @@
 import React from "react";
 import NotesTableColumns from "./NotesTableColumns";
 import NotesTableContent from "./NotesTableContent";
-import NotesTableFooter from "./NotesTableFooter";
 import { INotesProps } from "@/components/app/types/INotesProps";
 import NotesSectionTitle from "@/components/app/ui/NotesSectionTitle";
 
@@ -14,7 +13,6 @@ const NotesTable = (props: INotesProps): React.ReactElement => {
         <table className="table table-zebra w-full">
           <NotesTableColumns />
           <NotesTableContent notes={notes} />
-          <NotesTableFooter />
         </table>
       </div>
     </>
